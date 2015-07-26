@@ -9,7 +9,7 @@ app:
 
 # Hello, world!
 geny:
-    resource: "@GenyBundle/Controller/"
+    resource: "@FuzGenyBundle/Controller/"
     type:     annotation
     prefix:   /geny
 
