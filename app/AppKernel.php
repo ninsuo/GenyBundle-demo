@@ -24,6 +24,9 @@ class AppKernel extends Kernel
             new SmartCore\Bundle\AcceleratorCacheBundle\AcceleratorCacheBundle(),
             new Fuz\QuickStartBundle\FuzQuickStartBundle(),
             new AppBundle\AppBundle(),
+
+            // Hello, world!
+            new Fuz\GenyBundle\FuzGenyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

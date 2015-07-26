@@ -6,3 +6,10 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
     prefix:   /
+
+# Hello, world!
+geny:
+    resource: "@GenyBundle/Controller/"
+    type:     annotation
+    prefix:   /geny
+
