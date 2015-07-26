@@ -1,0 +1,37 @@
+parameters:
+    quickstart.locale.listener.class: Fuz\QuickStartBundle\EventListener\LocaleListener
+    quickstart.last_route.listener.class: Fuz\QuickStartBundle\EventListener\LastRouteListener
+    quickstart.captcha.class: Fuz\QuickStartBundle\Services\Captcha
+    quickstart.captcha.controller.class: Fuz\QuickStartBundle\Controller\CaptchaController
+    quickstart.captcha.listener.class: Fuz\QuickStartBundle\EventListener\CaptchaListener
+
+services:
+
+    quickstart.locale.listener:
+        class: %quickstart.locale.listener.class%
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    quickstart.last_route.listener:
+        class: %quickstart.last_route.listener.class%
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    quickstart.captcha:
+         class: %quickstart.captcha.class%
+         arguments: [@logger, @session, @doctrine.orm.entity_manager, %no_captcha%]
+         tags:
+             - { name: monolog.logger, channel: services.captcha }
+
+    quickstart.captcha.controller:
+        class: %quickstart.captcha.controller.class%
+        calls:
+        - [setContainer, ["@service_container"]]
+
+    quickstart.captcha.listener:
+        class: %quickstart.captcha.listener.class%
+        arguments: [@router, @quickstart.captcha, @quickstart.captcha.controller, %no_captcha%]
+        tags:
+        - { name: kernel.event_subscriber }
