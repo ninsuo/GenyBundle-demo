@@ -1,0 +1,30 @@
+{
+    "name": "demo",
+    "type": "form",
+    "fields": {
+        "firstname": {
+            "type": "text"
+        },
+        "gender": {
+            "type": "choice",
+            "options": {
+                "choices": [
+                    {
+                        "label": "Male",
+                        "value": "m"
+                    },
+                    {
+                        "label": "Female",
+                        "value": "f"
+                    }
+                ]
+            }
+        },
+        "submit": {
+            "type": "button",
+            "options": {
+                "data": "Submit"
+            }
+        }
+    }
+}
