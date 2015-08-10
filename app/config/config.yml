@@ -22,6 +22,9 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    serializer:
+        enabled: true
+
 
 # Twig Configuration
 twig:
@@ -102,3 +105,5 @@ fuz_quick_start:
         secret_key: %nocaptcha_secret_key%
         sessions_per_ip: { max: 20, delay: 3600 }
         strategies:
+
+
