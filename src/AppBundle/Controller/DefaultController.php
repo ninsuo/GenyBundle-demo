@@ -16,7 +16,9 @@ class DefaultController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        $type = $this->get('geny')->load('@AppBundle/Resources/geny/demo.json');
+//        $type = $this->get('geny')->load('@AppBundle/Resources/geny/demo.json');
+        $type = $this->get('geny')->load('@AppBundle/Resources/geny/demo2.json');
+
         return array('type' => $type);
     }
 

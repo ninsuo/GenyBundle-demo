@@ -1,0 +1,12 @@
+{
+    "name": "test",
+    "type": "text",
+    "options": {
+        "label": "geny.options.attr.key"
+    },
+    "validation": {
+        "type": {
+            "type": "string"
+        }
+    }
+}
