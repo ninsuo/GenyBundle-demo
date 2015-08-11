@@ -1,29 +1,50 @@
 {
     "name": "demo",
     "type": "form",
+    "options": {
+        "label": "Form test"
+    },
     "fields": {
         "firstname": {
-            "type": "text"
+            "type": "text",
+            "options": {
+                "label": "Enter your firstname"
+            }
         },
         "gender": {
             "type": "choice",
             "options": {
-                "choices": [
-                    {
-                        "label": "Male",
-                        "value": "m"
-                    },
-                    {
-                        "label": "Female",
-                        "value": "f"
+                "label": "Enter your gender",
+                "choices": {
+                    "Male": "m",
+                    "Female": "f"
+                }
+            }
+        },
+        "contact": {
+            "type": "container",
+            "options": {
+                "label": "Contact information"
+            },
+            "fields": {
+                "email": {
+                    "type": "text",
+                    "options": {
+                        "label": "Enter your email"
                     }
-                ]
+                },
+                "tel": {
+                    "type": "text",
+                    "options": {
+                        "label": "Enter your phone"
+                    }
+                }
             }
         },
         "submit": {
-            "type": "button",
+            "type": "submit",
             "options": {
-                "data": "Submit"
+                "label": "Send"
             }
         }
     }

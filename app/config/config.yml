@@ -33,6 +33,7 @@ twig:
     form:
         resources:
             - BraincraftedBootstrapBundle:Form:bootstrap.html.twig
+            - FuzGenyBundle:Form:fields.html.twig
     globals:
         brand: Geny
         nocaptcha_site_key: %nocaptcha_site_key%
