@@ -1,0 +1,8 @@
+{
+    "name": "firstname",
+    "type": "text",
+    "options": {
+        "label": "Enter your firstname"
+    },
+    "data": "alain"
+}

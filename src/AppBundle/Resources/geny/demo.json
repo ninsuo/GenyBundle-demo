@@ -9,7 +9,8 @@
             "type": "text",
             "options": {
                 "label": "Enter your firstname"
-            }
+            },
+            "data": "alain"
         },
         "gender": {
             "type": "choice",
@@ -37,6 +38,17 @@
                     "type": "text",
                     "options": {
                         "label": "Enter your phone"
+                    }
+                }
+            }
+        },
+        "test_col": {
+            "type": "collection",
+            "fields": {
+                "simple": {
+                    "type": "text",
+                    "options": {
+                        "label": "simple text"
                     }
                 }
             }

@@ -1,0 +1,20 @@
+{
+    "name": "test",
+    "type": "form",
+    "fields": [{
+            "name": "firstname",
+            "type": "text",
+            "options": {
+                "label": "Enter your firstname"
+            },
+            "data": "guy"
+        }, {
+            "name": "lastname",
+            "type": "text",
+            "options": {
+                "label": "Enter your lastname"
+            },
+            "data": "nesse"
+        }]
+}
+

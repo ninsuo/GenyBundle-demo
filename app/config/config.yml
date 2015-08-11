@@ -107,4 +107,3 @@ fuz_quick_start:
         sessions_per_ip: { max: 20, delay: 3600 }
         strategies:
 
-
