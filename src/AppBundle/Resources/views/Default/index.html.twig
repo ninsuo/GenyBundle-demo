@@ -2,8 +2,18 @@
 
 {% block body %}
 
-    Demo:
+    {% for data in views %}
 
-    {{ form(view) }}
+        <pre>{{ data.source }}</pre>
+
+        <br/>
+
+        {% if data.form %}
+            {{ form(data.form) }}
+        {% endif %}
+
+        <br/><br/>
+
+    {% endfor %}
 
 {% endblock %}

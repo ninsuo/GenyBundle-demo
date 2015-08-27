@@ -16,9 +16,31 @@ class DefaultController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        $type = $this->get('geny')->load('@AppBundle/Resources/geny/compound_text.json');
-
-        return array('view' => $type->createView());
+        return array('views' =>
+            array(
+                array(
+                    'form'   => $this->get('geny')->load('@AppBundle/Resources/geny/pints.json')->createView(),
+                    'source' => file_get_contents(__DIR__.'/../Resources/geny/pints.json'),
+                ),
+                array(
+                    'source' => file_get_contents(__DIR__.'/../../../GenyBundle/Resources/geny/types/text.json'),
+                ),
+                array(
+                    'source' => file_get_contents(__DIR__.'/../../../GenyBundle/Resources/geny/types/base.json'),
+                ),
+                array(
+                    'source' => file_get_contents(__DIR__.'/../../../GenyBundle/Resources/geny/types/number.json'),
+                ),
+                array(
+                    'form'   => $this->get('geny')->load('@AppBundle/Resources/geny/option_label.json')->createView(),
+                    'source' => file_get_contents(__DIR__.'/../Resources/geny/option_label.json'),
+                ),
+                array(
+                    'form'   => $this->get('geny')->load('@AppBundle/Resources/geny/option_trim.json')->createView(),
+                    'source' => file_get_contents(__DIR__.'/../Resources/geny/option_trim.json'),
+                ),
+            )
+        );
     }
 
 }

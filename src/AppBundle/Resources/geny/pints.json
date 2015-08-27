@@ -1,20 +1,19 @@
 {
-    "name": "test",
+    "name": "beers",
     "type": "form",
     "fields": [{
             "name": "firstname",
             "type": "text",
             "options": {
-                "label": "Enter your firstname"
+                "label": "Enter your firstname:"
             },
             "data": "guy"
         }, {
-            "name": "lastname",
-            "type": "text",
+            "name": "number",
+            "type": "number",
             "options": {
-                "label": "Enter your lastname"
+                "label": "How many pints do you want?"
             },
-            "data": "nesse"
+            "data": "42"
         }]
 }
-
