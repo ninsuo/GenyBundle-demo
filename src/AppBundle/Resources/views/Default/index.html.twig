@@ -8,7 +8,7 @@
 
         <br/>
 
-        {% if data.form %}
+        {% if data.form|default(false) %}
             {{ form(data.form) }}
         {% endif %}
 

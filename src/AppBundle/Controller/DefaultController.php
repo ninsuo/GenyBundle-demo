@@ -23,21 +23,21 @@ class DefaultController extends BaseController
                     'source' => file_get_contents(__DIR__.'/../Resources/geny/pints.json'),
                 ),
                 array(
-                    'source' => file_get_contents(__DIR__.'/../../../GenyBundle/Resources/geny/types/text.json'),
+                    'source' => file_get_contents(__DIR__.'/../../../../GenyBundle/Resources/geny/types/text.json'),
                 ),
                 array(
-                    'source' => file_get_contents(__DIR__.'/../../../GenyBundle/Resources/geny/types/base.json'),
+                    'source' => file_get_contents(__DIR__.'/../../../../GenyBundle/Resources/geny/types/base.json'),
                 ),
                 array(
-                    'source' => file_get_contents(__DIR__.'/../../../GenyBundle/Resources/geny/types/number.json'),
+                    'source' => file_get_contents(__DIR__.'/../../../../GenyBundle/Resources/geny/types/number.json'),
                 ),
                 array(
-                    'form'   => $this->get('geny')->load('@AppBundle/Resources/geny/option_label.json')->createView(),
-                    'source' => file_get_contents(__DIR__.'/../Resources/geny/option_label.json'),
+                    'form'   => $this->get('geny')->load('@AppBundle/Resources/geny/label.json')->createView(),
+                    'source' => file_get_contents(__DIR__.'/../Resources/geny/label.json'),
                 ),
                 array(
-                    'form'   => $this->get('geny')->load('@AppBundle/Resources/geny/option_trim.json')->createView(),
-                    'source' => file_get_contents(__DIR__.'/../Resources/geny/option_trim.json'),
+                    'form'   => $this->get('geny')->load('@AppBundle/Resources/geny/trim.json')->createView(),
+                    'source' => file_get_contents(__DIR__.'/../Resources/geny/trim.json'),
                 ),
             )
         );
