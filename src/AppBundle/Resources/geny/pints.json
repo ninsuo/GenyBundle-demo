@@ -7,12 +7,22 @@
             "options": {
                 "label": "Enter your firstname:"
             },
+            "validators": {
+                "type": {
+                    "type": "string"
+                }
+            },
             "data": "guy"
         }, {
             "name": "number",
             "type": "number",
             "options": {
                 "label": "How many pints do you want?"
+            },
+            "validators": {
+                "type": {
+                    "type": "integer"
+                }
             },
             "data": "42"
         }]
