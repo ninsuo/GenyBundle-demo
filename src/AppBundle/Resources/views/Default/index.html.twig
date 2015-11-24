@@ -2,18 +2,6 @@
 
 {% block body %}
 
-    {% for data in views %}
 
-        <pre>{{ data.source }}</pre>
-
-        <br/>
-
-        {% if data.form|default(false) %}
-            {{ form(data.form) }}
-        {% endif %}
-
-        <br/><br/>
-
-    {% endfor %}
 
 {% endblock %}
