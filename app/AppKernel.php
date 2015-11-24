@@ -26,7 +26,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
 
             // Hello, world!
-            new GenyBundle\FuzGenyBundle(),
+            new GenyBundle\GenyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
