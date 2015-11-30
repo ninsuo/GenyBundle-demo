@@ -5,6 +5,7 @@
     "description": "GenyBundle demonstration website",
     "autoload": {
         "psr-4": {
+            "GenyBundle\\": "../GenyBundle/",
             "": "src/",
             "SymfonyStandard\\": "app/SymfonyStandard/"
         }

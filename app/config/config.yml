@@ -25,7 +25,6 @@ framework:
     serializer:
         enabled: true
 
-
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
