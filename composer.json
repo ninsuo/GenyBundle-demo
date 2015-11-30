@@ -5,7 +5,6 @@
     "description": "GenyBundle demonstration website",
     "autoload": {
         "psr-4": {
-            "GenyBundle\\": "../GenyBundle/",
             "": "src/",
             "SymfonyStandard\\": "app/SymfonyStandard/"
         }
@@ -28,7 +27,8 @@
         "jms/i18n-routing-bundle": "^1.1",
         "jms/translation-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "^2",
-        "smart-core/accelerator-cache-bundle": "^1"
+        "smart-core/accelerator-cache-bundle": "^1",
+	"jms/serializer": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^2.3"
