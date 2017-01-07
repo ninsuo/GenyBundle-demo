@@ -12,5 +12,6 @@ app/logs/*
 build/
 vendor/
 bin/
+src/GenyBundle/
 composer.phar
 composer.lock
