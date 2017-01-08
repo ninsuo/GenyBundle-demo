@@ -25,6 +25,7 @@ class DefaultController extends BaseController {
      * @Template()
      */
     public function createFormAction(Request $request) {
+
         ini_set('display_errors', 1);
 
         return [
