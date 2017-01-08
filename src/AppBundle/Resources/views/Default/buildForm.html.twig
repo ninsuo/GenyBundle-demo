@@ -8,12 +8,7 @@
 
         <div class="col-md-6">
             <div class="text-center h2">Builder</div>
-            {{ render(controller('GenyBundle:Builder:render', {id: 42})) }}
-        </div>
-
-        <div class="col-md-6">
-            <div class="text-center h2">Preview</div>
-            {{ render(controller('GenyBundle:Renderer:render', {id: 42})) }}
+            {{ render(controller('GenyBundle:Builder:render', {id: (id) })) }}
         </div>
 
     </div>

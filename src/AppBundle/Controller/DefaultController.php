@@ -31,16 +31,23 @@ class DefaultController extends BaseController {
         return [
         ];
     }
-    
-     /**
-     * @Route("/build/form", name="buildForm")
+
+    /**
+     * @Route(
+     * "/build/form/{id}",
+     *  name="build_form",
+     *  requirements = {
+     *     "id" = "^\d+$"
+     *                }
+     * )
      * @Template()
      */
-    public function buildFormAction(Request $request) {
+    public function buildFormAction(Request $request, $id) {
 
         ini_set('display_errors', 1);
 
         return [
+            'id' => $id
         ];
     }
 
