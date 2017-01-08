@@ -5,23 +5,20 @@
     <div class="row">
 
         <div class="col-md-6">
-            <div class="text-center h2">Builder</div>
-            {{ render(controller('GenyBundle:Builder:render', {id: 42})) }}
+            <div class="text-center h2">Forms List</div>
+
         </div>
 
         <div class="col-md-6">
-            <div class="text-center h2">Preview</div>
-            {{ render(controller('GenyBundle:Renderer:render', {id: 42})) }}
+            <div class="h2">Actions</div>
+            <p>
+                <a href="{{ path('create_form') }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    New Form
+                </a>
+            </p>
         </div>
 
     </div>
-
-{% endblock %}
-
-{% block extra_js %}
-
-    <script src="{{ asset('bundles/fuzquickstart/js/jquery.domajax.js') }}"></script>
-    <script src="{{ asset('bundles/geny/js/collection/jquery.collection.js') }}"></script>
-    <script src="{{ asset('bundles/geny/js/jquery.geny.js') }}"></script>
 
 {% endblock %}

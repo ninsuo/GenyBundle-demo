@@ -21,7 +21,7 @@ class DefaultController extends BaseController {
     }
 
     /**
-     * @Route("/create/form", name="createForm")
+     * @Route("/create/form", name="create_form")
      * @Template()
      */
     public function createFormAction(Request $request) {
