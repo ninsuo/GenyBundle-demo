@@ -14,9 +14,15 @@ class DefaultController extends BaseController {
      * @Template()
      */
     public function indexAction(Request $request) {
-        ini_set('display_errors', 1);
+        $em = $this->getDoctrine()->getManager();
+
+        $listForms = $em->getRepository('GenyBundle:Form')->findBy(
+                array(), // Pas de critère
+                array('title' => 'asc')
+        );
 
         return [
+          'listForms' => $listForms  
         ];
     }
 
@@ -50,5 +56,7 @@ class DefaultController extends BaseController {
             'id' => $id
         ];
     }
+    
+ 
 
 }
