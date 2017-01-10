@@ -63,6 +63,38 @@ class DefaultController extends BaseController {
 
     /**
      * @Route(
+     * "/use/form/{id}",
+     *  name="use_form",
+     *  requirements = {
+     *     "id" = "^\d+$"
+     *                }
+     * )
+     * @Template()
+     */
+    public function useFormAction(Request $request, $id) {
+
+
+        // Check if form exists here
+
+
+
+        $form = $this->get('geny')->getForm($id);
+        $form->handleRequest($request);
+
+        $data = null;
+        if ($form->isValid()) {
+            $data = $form->getData();
+        }
+
+        return [
+            'id' => $id,
+            'form' => $form->createView(),
+            'data' => $data,
+        ];
+    }
+
+    /**
+     * @Route(
      * "/build/form/{id}",
      *  name="build_form",
      *  requirements = {
