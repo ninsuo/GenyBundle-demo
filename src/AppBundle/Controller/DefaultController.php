@@ -75,6 +75,8 @@ class DefaultController extends BaseController {
      */
     public function useFormAction(Request $request, $id) {
 
+        // Init
+        $set_id = 0;
 
         // Check if form exists here
 
@@ -88,6 +90,7 @@ class DefaultController extends BaseController {
             $data = $form->getData();
         }
 
+// To be done by a function. From a provider ?
         if ($data) {
             $em = $this->getDoctrine()->getManager();
             foreach ($data as $data_key => $data_value) {
@@ -100,13 +103,23 @@ class DefaultController extends BaseController {
                 $em->flush();
 
                 $data_id = $data_object->getId();
+                if ($set_id == 0) {
+                    $set_id = $data_id;
+                }
+
+                $data_object->setSetID($set_id);
+                $em->persist($data_object);
+                $em->flush();
+
+
+
                 $field_type = $field->getType();
                 switch ($field_type) {
                     case "text":
                         $data_text = $em->getRepository('GenyBundle:DataText')->findOneBy(array('data_id' => $data_id));
-                        if(!$data_text){
-                          $data_text = new DataText;
-                          $data_text->setDataID($data_object);
+                        if (!$data_text) {
+                            $data_text = new DataText;
+                            $data_text->setDataID($data_object);
                         }
                         $data_text->setText($data_value);
                         $data_text->setUpdatedAt(new \Datetime());
