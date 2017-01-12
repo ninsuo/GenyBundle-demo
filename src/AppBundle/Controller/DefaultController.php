@@ -171,6 +171,31 @@ class DefaultController extends BaseController {
             'data' => $data
         ];
     }
+    
+        /**
+     * @Route(
+     * "/view/data/{id}",
+     *  name="view_list_data_set",
+     *  requirements = {
+     *     "id" = "^\d+$"
+     *                }
+     * )
+     * @Template()
+     */
+    public function viewListSetDataFormAction(Request $request, $id) {
+        ini_set('display_errors', 1);
+        
+        $em = $this->getDoctrine()
+                ->getEntityManager();
+        
+        $form = $em->getRepository('GenyBundle:Form')->findOneById($id);
+        
+        
+        return [
+            'id' => $id,
+            'form' => $form
+        ];
+    }
 
     /**
      * @Route(
