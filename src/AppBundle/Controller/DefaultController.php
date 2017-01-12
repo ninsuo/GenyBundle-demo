@@ -127,6 +127,10 @@ class DefaultController extends BaseController {
             }
 
             $em->flush();
+            
+            $request->getSession()->getFlashBag()->add('notice', 'Data Persisted');
+            
+            return $this->redirectToRoute('view_data', array('id_form' => $id, 'id' => $set_id));
         }
 
         return [

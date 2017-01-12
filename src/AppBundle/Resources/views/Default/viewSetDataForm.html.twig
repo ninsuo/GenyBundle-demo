@@ -7,9 +7,17 @@
 
         <div class="col-md-6">
             <div class="text-center h2">{{form.title}} : Data Set {{id}}</div>
-            
+
             <div class="well well-sm">{{form.description}}</div>
-            
+
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert alert-success" role="alert">
+                    <p>{{ message }}</p>
+                </div>
+
+
+            {% endfor %}
+
             {% for key, value in data %}
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ value.label }}</div>
