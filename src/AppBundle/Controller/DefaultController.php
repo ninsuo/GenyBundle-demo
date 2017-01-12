@@ -157,7 +157,8 @@ class DefaultController extends BaseController {
         ;
 
         return [
-            'id' => $id
+            'id' => $id,
+            'data' => $data
         ];
     }
 

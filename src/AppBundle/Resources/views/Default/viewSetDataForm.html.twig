@@ -7,7 +7,15 @@
 
         <div class="col-md-6">
             <div class="text-center h2">Data Set {{id}}</div>
+            {% for key, value in data %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ value.label }}</div>
+                    <div class="panel-body">
+                        {{ value.text }}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
-            
+
 {% endblock %}
