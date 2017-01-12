@@ -190,10 +190,15 @@ class DefaultController extends BaseController {
         
         $form = $em->getRepository('GenyBundle:Form')->findOneById($id);
         
+        $data_set_list = $em->getRepository('GenyBundle:Data')
+                ->dataSetList($id)
+        ;
+        
         
         return [
             'id' => $id,
-            'form' => $form
+            'form' => $form,
+            'data_set_list' => $data_set_list
         ];
     }
 

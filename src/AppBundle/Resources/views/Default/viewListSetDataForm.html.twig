@@ -9,8 +9,12 @@
             <div class="text-center h2">{{form.title}} : Data Set List</div>
 
             <div class="well well-sm">{{form.description}}</div>
+            <ul class="list-group">
+                {% for key, value in data_set_list %}
+                    <li class="list-group-item"><a href="{{ path('view_data', {'id_form': form.id,'id': value.id}) }}">{{ value.id }} / {{ value.createdAt|date('d/m/Y H:m:s') }}</a></li>
+                {% endfor %}
+            </ul>
 
-            
         </div>
     </div>
 
