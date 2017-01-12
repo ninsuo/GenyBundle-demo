@@ -138,7 +138,7 @@ class DefaultController extends BaseController {
 
     /**
      * @Route(
-     * "/view/data/{id}",
+     * "/view/data/{id_form}/{id}",
      *  name="view_data",
      *  requirements = {
      *     "id" = "^\d+$"
@@ -146,11 +146,16 @@ class DefaultController extends BaseController {
      * )
      * @Template()
      */
-    public function viewSetDataFormAction(Request $request, $id) {
+    public function viewSetDataFormAction(Request $request, $id_form, $id) {
         ini_set('display_errors', 1);
+        
 
         $em = $this->getDoctrine()
                 ->getEntityManager();
+        
+        $form = $em->getRepository('GenyBundle:Form')->findOneById($id_form);
+        
+
 
         $data = $em->getRepository('GenyBundle:Data')
                 ->dataSet($id)
@@ -158,6 +163,7 @@ class DefaultController extends BaseController {
 
         return [
             'id' => $id,
+            'form' => $form,
             'data' => $data
         ];
     }
