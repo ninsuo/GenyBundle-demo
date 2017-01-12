@@ -7,17 +7,20 @@
         <div class="col-md-6">
             <div class="text-center h2">Forms List</div>
             <ul class="list-group">
-        {% for form in listForms %}
-            <li class="list-group-item">
-                <h3>
-                <a href="{{ path('build_form', {'id': form.id}) }}">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                    {{ form.title }}                    
-                </a>
-                </h3>
-            </li>
-        {% endfor %}
-    </ul>
+                {% for form in listForms %}
+                    <li class="list-group-item">
+                        <h3>
+                            <a href="{{ path('use_form', {'id': form.id}) }}">
+                                <i class="glyphicon glyphicon-menu-right"></i>
+                                {{ form.title }}                    
+                            </a>
+                            <a href="{{ path('build_form', {'id': form.id}) }}">
+                                <i class="glyphicon glyphicon-pencil"></i>                   
+                            </a>
+                        </h3>
+                    </li>
+                {% endfor %}
+            </ul>
 
         </div>
 
