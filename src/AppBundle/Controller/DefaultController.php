@@ -90,40 +90,38 @@ class DefaultController extends BaseController {
             $data = $form->getData();
         }
 
-// To be done by a function. From a provider ?
+// To be done by a function. From a provider ? From a Repo ?
         if ($data) {
             $em = $this->getDoctrine()->getManager();
             foreach ($data as $data_key => $data_value) {
 
-                $data_object = new Data();
                 $field = $em->getRepository('GenyBundle:Field')->findOneByName($data_key);
-                $data_object->setFieldID($field);
-                $data_object->setUpdatedAt(new \Datetime());
-                $em->persist($data_object);
-                $em->flush();
-
-                $data_id = $data_object->getId();
-                if ($set_id == 0) {
-                    $set_id = $data_id;
-                }
-
-                $data_object->setSetID($set_id);
-                $em->persist($data_object);
-                $em->flush();
-
-
-
                 $field_type = $field->getType();
+
                 switch ($field_type) {
                     case "text":
-                        $data_text = $em->getRepository('GenyBundle:DataText')->findOneBy(array('data_id' => $data_id));
-                        if (!$data_text) {
-                            $data_text = new DataText;
-                            $data_text->setDataID($data_object);
-                        }
+                        $data_text = new DataText;
                         $data_text->setText($data_value);
                         $data_text->setUpdatedAt(new \Datetime());
                         $em->persist($data_text);
+                        $em->flush();
+
+                        $data_object = new Data();
+                        $data_object->setFieldID($field);
+                        $data_object->setUpdatedAt(new \Datetime());
+                        $em->persist($data_object);
+                        $em->flush();
+
+                        $data_id = $data_object->getId();
+                        if ($set_id == 0) {
+                            $set_id = $data_id;
+                        }
+
+                        $data_object->setDataTextID($data_text);
+
+                        $data_object->setSetID($set_id);
+                        $em->persist($data_object);
+                        $em->flush();
                         break;
                 }
             }
@@ -135,6 +133,34 @@ class DefaultController extends BaseController {
             'id' => $id,
             'form' => $form->createView(),
             'data' => $data,
+        ];
+    }
+
+    /**
+     * @Route(
+     * "/view/data/{id}",
+     *  name="view_data",
+     *  requirements = {
+     *     "id" = "^\d+$"
+     *                }
+     * )
+     * @Template()
+     */
+    public function viewSetDataFormAction(Request $request, $id) {
+        ini_set('display_errors', 1);
+
+        $em = $this->getDoctrine()
+                ->getEntityManager();
+
+        $data = $em->getRepository('GenyBundle:Data')
+                ->dataSet($id)
+        ;
+
+        var_dump($data);
+        die('Pouet');
+
+        return [
+            'id' => $id
         ];
     }
 
