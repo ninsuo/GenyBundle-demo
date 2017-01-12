@@ -156,9 +156,6 @@ class DefaultController extends BaseController {
                 ->dataSet($id)
         ;
 
-        var_dump($data);
-        die('Pouet');
-
         return [
             'id' => $id
         ];
