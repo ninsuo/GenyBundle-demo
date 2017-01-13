@@ -1,9 +1,17 @@
-#GenyBundle
+#GenyBundle Demo
 
-##Goal of this bundle is to provide:
+##Goal of GenyBundle is to provide :
 
-a user interface to create forms
-a user interface to render and validate those forms
+A user interface to create forms
+
+A user interface to render and validate those forms
+
+##Goal GenyBundle Demo is to show :
+
+
+How to implement a form builder
+
+How to implement buitl form, persit and retreive data (on ly on text input and without validation for now )
 
 #WARNING: under development! POCs, etc.
 
