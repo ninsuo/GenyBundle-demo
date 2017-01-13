@@ -87,3 +87,9 @@ Create the base :
 Create the tables
 
     php app/console doctrine:schema:update --force
+    
+## Step 5
+
+Make assest accessible
+
+     php app/console assetic:dump
