@@ -59,3 +59,11 @@ or something like
     php ../composer.phar install
 
 It depends of your installation...
+
+Be patient.
+
+Personnaly, I have an memry issue. So I have to run this command :
+
+    php -d memory_limit=2G ../composer.phar install
+    
+More info here : https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
