@@ -11,7 +11,7 @@ A user interface to render and validate those forms
 
 How to implement a form builder
 
-How to implement buitl form, persit and retreive data (on ly on text input and without validation for now )
+How to implement buitl form, persit and retreive data (only on text input and without validation for now )
 
 #WARNING: under development! POCs, etc.
 
@@ -33,3 +33,9 @@ A bundle should not embed third-party libraries written in JavaScript, CSS or an
 As this bundle contains a complex UI, it was too challenging for me to do it without jQuery and Twitter Bootstrap.
 
 They are not included in the bundle.
+
+#Installation
+
+## Step 1
+
+Clone or download this repo.
