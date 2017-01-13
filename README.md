@@ -90,9 +90,11 @@ Create the tables
     
 ## Step 5
 
-Make assest accessible
+Make assets accessible
 
      php app/console assetic:dump
+     
+     php app/console assets:install --symlink
      
 ## Step 6
 
