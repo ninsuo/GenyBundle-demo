@@ -38,4 +38,24 @@ They are not included in the bundle.
 
 ## Step 1
 
-Clone or download this repo.
+Download this repo.
+
+Put the folder in the "www" directory like "C:\wamp\www\" on a wamp.
+
+Rename it if you wish
+
+## Step 2
+
+Access it throught command line.
+
+    cd C:\wamp\www\mygenybundledemo
+
+Type the command : 
+
+    php composer.phar install
+    
+or something like
+
+    php ../composer.phar install
+
+It depends of your installation...
