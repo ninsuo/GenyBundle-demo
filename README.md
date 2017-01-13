@@ -93,3 +93,13 @@ Create the tables
 Make assest accessible
 
      php app/console assetic:dump
+     
+## Step 6
+
+Access it  !
+
+For example : http://localhost/GenyBundleDemo/web/app_dev.php/
+
+Enjoy it !!!! or not... 
+
+Be aware only the input text can be persisted and updated !
