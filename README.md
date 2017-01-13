@@ -48,7 +48,7 @@ Rename it if you wish
 
 Access it throught command line.
 
-    cd C:\wamp\www\mygenybundledemo
+    cd C:\wamp\www\GenyBundleDemo
 
 Type the command : 
 
@@ -67,3 +67,23 @@ Personnaly, I have an memry issue. So I have to run this command :
     php -d memory_limit=2G ../composer.phar install
     
 More info here : https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
+
+Answer the questions...
+
+You'll get this error : Fatal error: Class 'GenyBundle\GenyBundle' not found in C:\wamp\www\GenyBundleDemo\app\AppKernel.php on line 29... Don't mind it. We will correct this.
+
+## Step 3
+
+Download my actual GenyBundle : https://github.com/Gilles-Lengy/GenyBundle/archive/master.zip
+
+Put it in "C:\wamp\www\GenyBundleDemo\src" under the name : "GenyBundle"
+
+## Step 4
+
+Create the base :
+
+    php app/console doctrine:database:create
+    
+Create the tables
+
+    php app/console doctrine:schema:update --force
