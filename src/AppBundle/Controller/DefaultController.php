@@ -233,6 +233,7 @@ class DefaultController extends BaseController {
      * "/view/data/{id_form}/{id}",
      *  name="view_data",
      *  requirements = {
+     *     "id_form" = "^\d+$",
      *     "id" = "^\d+$"
      *                }
      * )
@@ -281,8 +282,7 @@ class DefaultController extends BaseController {
         $data_set_list = $em->getRepository('GenyBundle:Data')
                 ->dataSetList($id)
         ;
-
-
+        
         return [
             'id' => $id,
             'form' => $form,
