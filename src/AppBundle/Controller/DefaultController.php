@@ -154,8 +154,7 @@ class DefaultController extends BaseController {
     public function updateDataFormAction(Request $request, $id_form, $id_data) {
 
         // Init
-        $set_id = 0;
-
+        $set_id = $id_data;  // Well, that's pretty ugly !!!! To be improved !!!!!
         // Check if form exists here
 
 
@@ -167,9 +166,10 @@ class DefaultController extends BaseController {
                 ->dataSet($id_data)
         ;
 
+
         $overloadOptions = array();
         foreach ($data_set as $data_to_catched) {
-               $overloadOptions[$data_to_catched['name']]=array('data' => $data_to_catched['text']);
+            $overloadOptions[$data_to_catched['name']] = array('data' => $data_to_catched['text']);
         }
 
         $form = $this->get('geny')->getForm($id_form, $overloadOptions);
@@ -181,48 +181,45 @@ class DefaultController extends BaseController {
             $data = $form->getData();
         }
 
-          // To be done by a function. From a provider ? From a Repo ? From the geny service ?
-          if ($data) {
-          $em = $this->getDoctrine()->getManager();
-          foreach ($data as $data_key => $data_value) {
+        // To be done by a function. From a provider ? From a Repo ? From the geny service ?
+        if ($data) {
 
-          $field = $em->getRepository('GenyBundle:Field')->findOneByName($data_key);
-          $field_type = $field->getType();
+            $em = $this->getDoctrine()->getManager();
+            foreach ($data as $data_key => $data_value) {
 
-          switch ($field_type) {
-          case "text":
-          $data_text = new DataText;
-          $data_text->setText($data_value);
-          $data_text->setUpdatedAt(new \Datetime());
-          $em->persist($data_text);
-          $em->flush();
+                foreach ($data_set as $data_set_key => $data_set_value) {
 
-          $data_object = new Data();
-          $data_object->setFieldID($field);
-          $data_object->setUpdatedAt(new \Datetime());
-          $em->persist($data_object);
-          $em->flush();
+                    if ($data_key == $data_set_value['name']) {
+                        $field = $em->getRepository('GenyBundle:Field')->findOneByName($data_key);
+                        $field_type = $field->getType();
 
-          $data_id = $data_object->getId();
-          if ($set_id == 0) {
-          $set_id = $data_id;
-          }
+                        switch ($field_type) {
 
-          $data_object->setDataTextID($data_text);
+                            case "text":
 
-          $data_object->setSetID($set_id);
-          $em->persist($data_object);
-          $em->flush();
-          break;
-          }
-          }
+                                $data_text = $em->getRepository('GenyBundle:DataText')->findOneById($data_set_value['data_text_id']);
 
-          $em->flush();
+                                $data_text->setText($data_value);
+                                $data_text->setUpdatedAt(new \Datetime());
+                                $em->persist($data_text);
+                                $em->flush();
 
-          $request->getSession()->getFlashBag()->add('notice', 'Data Persisted');
 
-          return $this->redirectToRoute('view_data', array('id_form' => $id_form, 'id' => $set_id));
-          }
+                                /* To  implement update data, only to persist setUpdatedAt
+                                 * *
+                                 */
+                                break;
+                        }
+                    }
+                }
+            }
+
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Data Persisted');
+
+            return $this->redirectToRoute('view_data', array('id_form' => $id_form, 'id' => $set_id));
+        }
 
         return [
             'id' => $id_form,
