@@ -7,9 +7,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Base\BaseController;
 use GenyBundle\Entity\Form;
+use GenyBundle\Entity\Field;
 use GenyBundle\Form\FormType;
 use GenyBundle\Entity\Data;
-use GenyBundle\Entity\DataText;
 
 class DefaultController extends BaseController {
 
@@ -52,7 +52,7 @@ class DefaultController extends BaseController {
             $em->flush();
 
 
-            //$request->getSession()->getFlashBag()->add('notice', 'Form created');// to implement ?
+//$request->getSession()->getFlashBag()->add('notice', 'Form created');// to implement ?
 
 
             return $this->redirectToRoute('build_form', array('id' => $form_entity->getId()));
@@ -75,10 +75,10 @@ class DefaultController extends BaseController {
      */
     public function useFormAction(Request $request, $id) {
 
-        // Init
+// Init
         $set_id = 0;
 
-        // Check if form exists here
+// Check if form exists here
 
 
 
@@ -134,9 +134,9 @@ class DefaultController extends BaseController {
      */
     public function updateDataFormAction(Request $request, $id_form, $id_data) {
 
-        // Init
+// Init
         $set_id = $id_data;  // Well, that's pretty ugly !!!! To be improved !!!!!
-        // Check if form exists here
+// Check if form exists here
 
 
         $em = $this->getDoctrine()
@@ -157,12 +157,12 @@ class DefaultController extends BaseController {
         $form->handleRequest($request);
 
         $data = null;
-        //$data= array('question_1'=>'rep1','question_2' => 'rep2');
+//$data= array('question_1'=>'rep1','question_2' => 'rep2');
         if ($form->isValid()) {
             $data = $form->getData();
         }
 
-        // To be done by a function. From a provider ? From a Repo ? From the geny service ?
+// To be done by a function. From a provider ? From a Repo ? From the geny service ?
         if ($data) {
 
             $em = $this->getDoctrine()->getManager();
@@ -219,7 +219,7 @@ class DefaultController extends BaseController {
      * )
      * @Template()
      */
-    public function viewDataFormAction(Request $request, $id) {
+    public function viewDataAction(Request $request, $id) {
         ini_set('display_errors', 1);
 
 
@@ -229,20 +229,23 @@ class DefaultController extends BaseController {
         $data = $em->getRepository('GenyBundle:Data')
                 ->findOneById($id);
 
-
         $form = $data->getForm();
 
 
-        /*
+        $data_data = $data->getData();
 
-          ;
-         * *
-         */
+        $label_data = array();
+        foreach ($data_data as $data_key => $data_value) {          
+                $field = $em->getRepository('GenyBundle:Field')->findOneBy(array('name'=> $data_key, 'form'=> $form));
+                $label = $field->getLabel();
+                $label_data[$label] = $data_value;
+        }
+
 
         return [
             'id' => $id,
             'form' => $form,
-            'data' => $data
+            'label_data' => $label_data
         ];
     }
 
