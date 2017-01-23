@@ -93,7 +93,7 @@ class DefaultController extends BaseController {
 // To be done by a function. From a provider ? From a Repo ?
         if ($data) {
 
-            $form_entity = $this->get('geny')->getFormEntity($id);     
+            $form_entity = $this->get('geny')->getFormEntity($id);
 
             $em = $this->getDoctrine()->getManager();
             $em->getRepository('GenyBundle:Data');
@@ -105,7 +105,7 @@ class DefaultController extends BaseController {
 
             $em->persist($data_object);
             $em->flush();
-            
+
             $id = $data_object->getId();
 
 
@@ -227,7 +227,8 @@ class DefaultController extends BaseController {
                 ->getEntityManager();
 
         $data = $em->getRepository('GenyBundle:Data')
-                ->find($id);
+                ->findOneById($id);
+
 
         $form = $data->getForm();
 
@@ -247,15 +248,15 @@ class DefaultController extends BaseController {
 
     /**
      * @Route(
-     * "/view/data/{id}",
-     *  name="view_list_data_set",
+     * "/view/list/data/{id}",
+     *  name="view_list_data",
      *  requirements = {
      *     "id" = "^\d+$"
      *                }
      * )
      * @Template()
      */
-    public function viewListSetDataFormAction(Request $request, $id) {
+    public function viewListDataFormAction(Request $request, $id) {
         ini_set('display_errors', 1);
 
         $em = $this->getDoctrine()
@@ -263,14 +264,15 @@ class DefaultController extends BaseController {
 
         $form = $em->getRepository('GenyBundle:Form')->findOneById($id);
 
-        $data_set_list = $em->getRepository('GenyBundle:Data')
-                ->dataSetList($id)
-        ;
+        $data_list = $em->getRepository('GenyBundle:Data')
+                ->findBy(
+                array('form' => $form), array('updatedAt' => 'ASC')
+        );
 
         return [
             'id' => $id,
             'form' => $form,
-            'data_set_list' => $data_set_list
+            'data_list' => $data_list
         ];
     }
 

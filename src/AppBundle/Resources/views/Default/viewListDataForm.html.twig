@@ -10,8 +10,8 @@
 
             <div class="well well-sm">{{form.description}}</div>
             <ul class="list-group">
-                {% for key, value in data_set_list %}
-                    <li class="list-group-item"><a href="{{ path('view_data', {'id_form': form.id,'id': value.setid}) }}">{{ value.setid }} / {{ value.createdAt|date('d/m/Y H:m:s') }}</a></li>
+                {% for key, value in data_list %}
+                    <li class="list-group-item"><a href="{{ path('view_data', {'id': value.id}) }}">{{ value.id }} / {{ value.updatedAt|date('d/m/Y H:m:s') }}</a></li>
                 {% endfor %}
             </ul>
 
