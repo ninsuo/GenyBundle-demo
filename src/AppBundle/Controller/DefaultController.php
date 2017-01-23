@@ -92,45 +92,26 @@ class DefaultController extends BaseController {
 
 // To be done by a function. From a provider ? From a Repo ?
         if ($data) {
+
+            $form_entity = $this->get('geny')->getFormEntity($id);     
+
             $em = $this->getDoctrine()->getManager();
-            foreach ($data as $data_key => $data_value) {
+            $em->getRepository('GenyBundle:Data');
 
-                $field = $em->getRepository('GenyBundle:Field')->findOneByName($data_key);
-                $field_type = $field->getType();
+            $data_object = new Data();
+            $data_object->setForm($form_entity);
+            $data_object->setData($data);
+            $data_object->setUpdatedAt(new \Datetime());
 
-                switch ($field_type) {
-                    case "text":
-                        $data_text = new DataText;
-                        $data_text->setText($data_value);
-                        $data_text->setUpdatedAt(new \Datetime());
-                        $em->persist($data_text);
-                        $em->flush();
-
-                        $data_object = new Data();
-                        $data_object->setFieldID($field);
-                        $data_object->setUpdatedAt(new \Datetime());
-                        $em->persist($data_object);
-                        $em->flush();
-
-                        $data_id = $data_object->getId();
-                        if ($set_id == 0) {
-                            $set_id = $data_id;
-                        }
-
-                        $data_object->setDataTextID($data_text);
-
-                        $data_object->setSetID($set_id);
-                        $em->persist($data_object);
-                        $em->flush();
-                        break;
-                }
-            }
-
+            $em->persist($data_object);
             $em->flush();
+            
+            $id = $data_object->getId();
+
 
             $request->getSession()->getFlashBag()->add('notice', 'Data Persisted');
 
-            return $this->redirectToRoute('view_data', array('id_form' => $id, 'id' => $set_id));
+            return $this->redirectToRoute('view_data', array('id' => $id));
         }
 
         return [
@@ -230,29 +211,32 @@ class DefaultController extends BaseController {
 
     /**
      * @Route(
-     * "/view/data/{id_form}/{id}",
+     * "/view/data/{id}",
      *  name="view_data",
      *  requirements = {
-     *     "id_form" = "^\d+$",
      *     "id" = "^\d+$"
      *                }
      * )
      * @Template()
      */
-    public function viewSetDataFormAction(Request $request, $id_form, $id) {
+    public function viewDataFormAction(Request $request, $id) {
         ini_set('display_errors', 1);
 
 
         $em = $this->getDoctrine()
                 ->getEntityManager();
 
-        $form = $em->getRepository('GenyBundle:Form')->findOneById($id_form);
-
-
-
         $data = $em->getRepository('GenyBundle:Data')
-                ->dataSet($id)
-        ;
+                ->find($id);
+
+        $form = $data->getForm();
+
+
+        /*
+
+          ;
+         * *
+         */
 
         return [
             'id' => $id,
@@ -282,7 +266,7 @@ class DefaultController extends BaseController {
         $data_set_list = $em->getRepository('GenyBundle:Data')
                 ->dataSetList($id)
         ;
-        
+
         return [
             'id' => $id,
             'form' => $form,
