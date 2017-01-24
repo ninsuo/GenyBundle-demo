@@ -123,89 +123,91 @@ class DefaultController extends BaseController {
 
     /**
      * @Route(
-     * "/update/data/form/{id_form}/{id_data}",
-     *  name="update_data_form",
+     * "/update/data/{id}",
+     *  name="update_data",
      *  requirements = {
-     *     "id_form" = "^\d+$",
-     *     "id_data" = "^\d+$",
+     *     "id" = "^\d+$",
      *                }
      * )
      * @Template()
      */
-    public function updateDataFormAction(Request $request, $id_form, $id_data) {
-
-// Init
-        $set_id = $id_data;  // Well, that's pretty ugly !!!! To be improved !!!!!
-// Check if form exists here
-
+    public function updateDataAction(Request $request, $id) {
 
         $em = $this->getDoctrine()
                 ->getEntityManager();
 
 
-        $data_set = $em->getRepository('GenyBundle:Data')
-                ->dataSet($id_data)
-        ;
+        $data = $em->getRepository('GenyBundle:Data')
+                ->findOneById($id);
 
+        $form = $data->getForm();
+        $form_id = $form->getId();
+
+        $data_field = $em->getRepository('GenyBundle:Data')
+                ->dataField($id);
 
         $overloadOptions = array();
-        foreach ($data_set as $data_to_catched) {
-            $overloadOptions[$data_to_catched['name']] = array('data' => $data_to_catched['text']);
+        foreach ($data_field as $data_to_catched) {
+            $overloadOptions[$data_to_catched['field_name']] = array('data' => $data_to_catched['value']);
         }
 
-        $form = $this->get('geny')->getForm($id_form, $overloadOptions);
+        $form = $this->get('geny')->getForm($form_id, $overloadOptions);
         $form->handleRequest($request);
 
-        $data = null;
-//$data= array('question_1'=>'rep1','question_2' => 'rep2');
-        if ($form->isValid()) {
-            $data = $form->getData();
-        }
 
-// To be done by a function. From a provider ? From a Repo ? From the geny service ?
-        if ($data) {
+        /*
+          $data = null;
+          //$data= array('question_1'=>'rep1','question_2' => 'rep2');
+          if ($form->isValid()) {
+          $data = $form->getData();
+          }
 
-            $em = $this->getDoctrine()->getManager();
-            foreach ($data as $data_key => $data_value) {
+          // To be done by a function. From a provider ? From a Repo ? From the geny service ?
+          /*
+          if ($data) {
 
-                foreach ($data_set as $data_set_key => $data_set_value) {
+          $em = $this->getDoctrine()->getManager();
+          foreach ($data as $data_key => $data_value) {
 
-                    if ($data_key == $data_set_value['name']) {
-                        $field = $em->getRepository('GenyBundle:Field')->findOneByName($data_key);
-                        $field_type = $field->getType();
+          foreach ($data_set as $data_set_key => $data_set_value) {
 
-                        switch ($field_type) {
+          if ($data_key == $data_set_value['name']) {
+          $field = $em->getRepository('GenyBundle:Field')->findOneByName($data_key);
+          $field_type = $field->getType();
 
-                            case "text":
+          switch ($field_type) {
 
-                                $data_text = $em->getRepository('GenyBundle:DataText')->findOneById($data_set_value['data_text_id']);
+          case "text":
 
-                                $data_text->setText($data_value);
-                                $data_text->setUpdatedAt(new \Datetime());
-                                $em->persist($data_text);
-                                $em->flush();
+          $data_text = $em->getRepository('GenyBundle:DataText')->findOneById($data_set_value['data_text_id']);
+
+          $data_text->setText($data_value);
+          $data_text->setUpdatedAt(new \Datetime());
+          $em->persist($data_text);
+          $em->flush();
 
 
-                                /* To  implement update data, only to persist setUpdatedAt
-                                 * *
-                                 */
-                                break;
-                        }
-                    }
-                }
-            }
+          /* To  implement update data, only to persist setUpdatedAt
+         * *
+         */
+        /*
+          break;
+          }
+          }
+          }
+          }
 
-            $em->flush();
+          $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Data Persisted');
+          $request->getSession()->getFlashBag()->add('notice', 'Data Persisted');
 
-            return $this->redirectToRoute('view_data', array('id_form' => $id_form, 'id' => $set_id));
-        }
+          return $this->redirectToRoute('view_data', array('id_form' => $id_form, 'id' => $set_id));
+          }
+         */
 
         return [
-            'id' => $id_form,
             'form' => $form->createView(),
-            'data' => $data,
+            'id' => $form_id
         ];
     }
 

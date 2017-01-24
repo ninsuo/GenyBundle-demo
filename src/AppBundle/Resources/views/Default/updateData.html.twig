@@ -9,13 +9,6 @@
             <div class="text-center h2">Form</div>
             {{ geny_form(id, form) }}
 
-            {% if data|default(false) %}
-
-                <pre>{{ data | json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
-
-            {% endif %}
-
-
         </div>
     </div>
 {% endblock %}
