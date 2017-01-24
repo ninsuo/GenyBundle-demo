@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Item
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="GL\ItemBundle\Entity\ItemRepository")
+ * @ORM\Entity(repositoryClass="GL\ItemBundle\Repository\ItemRepository")
  */
-class Item
-{
+class Item {
+
     /**
      * @var integer
      *
@@ -29,11 +29,11 @@ class Item
     private $name;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="description", type="text")
      */
-    private $createdAt;
+    private $description;
 
     /**
      * @var \DateTime
@@ -43,20 +43,22 @@ class Item
     private $updatedAt;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="created_at", type="datetime")
      */
-    private $description;
+    private $createdAt;
 
+    public function __construct() {
+        $this->createdAt = new \Datetime();
+    }
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -67,8 +69,7 @@ class Item
      *
      * @return Item
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -79,57 +80,8 @@ class Item
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Item
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Item
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 
     /**
@@ -139,8 +91,7 @@ class Item
      *
      * @return Item
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -151,9 +102,52 @@ class Item
      *
      * @return string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
-}
 
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Item
+     */
+    public function setCreatedAt($createdAt) {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Item
+     */
+    public function setUpdatedAt($updatedAt) {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt() {
+        return $this->updatedAt;
+    }
+
+}
