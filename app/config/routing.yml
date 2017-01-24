@@ -1,9 +1,13 @@
-
 fuz_quickstart:
     resource: "@FuzQuickStartBundle/Resources/config/routing.yml"
 
 app:
     resource: "@AppBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+gl_item:
+    resource: "@GLItemBundle/Controller/"
     type:     annotation
     prefix:   /
 
