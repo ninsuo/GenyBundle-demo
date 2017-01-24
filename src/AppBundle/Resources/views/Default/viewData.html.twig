@@ -22,7 +22,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ value['field_label'] }}</div>
                     <div class="panel-body">
-                        {{ value['value'] }}
+                        {% if value['type'] == 'text' %}
+                            {{ value['value'] }}
+                        {% elseif value['type'] == 'checkbox' %}
+                            <input type="checkbox" {% if value['value'] == 1 %} checked {% endif %}>
+                        {% else %}
+                            Type not implemented yet {{ value['value'] }}
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
