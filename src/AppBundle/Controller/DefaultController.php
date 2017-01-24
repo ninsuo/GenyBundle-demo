@@ -226,26 +226,19 @@ class DefaultController extends BaseController {
         $em = $this->getDoctrine()
                 ->getEntityManager();
 
+
         $data = $em->getRepository('GenyBundle:Data')
                 ->findOneById($id);
 
         $form = $data->getForm();
 
-
-        $data_data = $data->getData();
-
-        $label_data = array();
-        foreach ($data_data as $data_key => $data_value) {          
-                $field = $em->getRepository('GenyBundle:Field')->findOneBy(array('name'=> $data_key, 'form'=> $form));
-                $label = $field->getLabel();
-                $label_data[$label] = $data_value;
-        }
-
+        $data_field = $em->getRepository('GenyBundle:Data')
+                ->dataField($id);
 
         return [
             'id' => $id,
             'form' => $form,
-            'label_data' => $label_data
+            'data_field' => $data_field
         ];
     }
 

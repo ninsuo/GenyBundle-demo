@@ -18,11 +18,11 @@
 
             {% endfor %}
 
-            {% for label, value in label_data %}
+            {% for key, value in data_field %}
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ label }}</div>
+                    <div class="panel-heading">{{ value['field_label'] }}</div>
                     <div class="panel-body">
-                        {{ value }}
+                        {{ value['value'] }}
                     </div>
                 </div>
             {% endfor %}
