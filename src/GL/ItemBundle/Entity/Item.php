@@ -71,7 +71,7 @@ class Item {
      */
     public function setName($name) {
         $this->name = $name;
-
+        $this->updatedAt = new \Datetime();
         return $this;
     }
 
@@ -93,7 +93,7 @@ class Item {
      */
     public function setDescription($description) {
         $this->description = $description;
-
+        $this->updatedAt = new \Datetime();
         return $this;
     }
 
