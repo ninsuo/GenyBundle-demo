@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Base\BaseController;
 use GenyBundle\Entity\Form;
-use GenyBundle\Entity\Field;
 use GenyBundle\Form\FormType;
 use GenyBundle\Entity\Data;
 
@@ -137,10 +136,10 @@ class DefaultController extends BaseController {
                 ->getEntityManager();
 
 
-        $data = $em->getRepository('GenyBundle:Data')
+        $data_entity = $em->getRepository('GenyBundle:Data')
                 ->findOneById($id);
 
-        $form = $data->getForm();
+        $form = $data_entity->getForm();
         $form_id = $form->getId();
 
         $data_field = $em->getRepository('GenyBundle:Data')
@@ -151,62 +150,34 @@ class DefaultController extends BaseController {
             $overloadOptions[$data_to_catched['field_name']] = array('data' => $data_to_catched['value']);
         }
 
-        $form = $this->get('geny')->getForm($form_id, $overloadOptions);
-        $form->handleRequest($request);
+        $form2request = $this->get('geny')->getForm($form_id, $overloadOptions);
+        $form2request->handleRequest($request);
 
 
-        /*
-          $data = null;
-          //$data= array('question_1'=>'rep1','question_2' => 'rep2');
-          if ($form->isValid()) {
-          $data = $form->getData();
-          }
 
-          // To be done by a function. From a provider ? From a Repo ? From the geny service ?
-          /*
-          if ($data) {
+        $data = null;
 
-          $em = $this->getDoctrine()->getManager();
-          foreach ($data as $data_key => $data_value) {
+        if ($form2request->isValid()) {
+            $data = $form2request->getData();
+        }
 
-          foreach ($data_set as $data_set_key => $data_set_value) {
+        if ($data) {
+            
+            $data_entity->setData($data);
+            
+            $em->persist($data_entity);
 
-          if ($data_key == $data_set_value['name']) {
-          $field = $em->getRepository('GenyBundle:Field')->findOneByName($data_key);
-          $field_type = $field->getType();
+            $em->flush();
 
-          switch ($field_type) {
+            $request->getSession()->getFlashBag()->add('notice', 'Data Persisted');
 
-          case "text":
+            return $this->redirectToRoute('view_data', array('id' => $id));
+            
+        }
 
-          $data_text = $em->getRepository('GenyBundle:DataText')->findOneById($data_set_value['data_text_id']);
-
-          $data_text->setText($data_value);
-          $data_text->setUpdatedAt(new \Datetime());
-          $em->persist($data_text);
-          $em->flush();
-
-
-          /* To  implement update data, only to persist setUpdatedAt
-         * *
-         */
-        /*
-          break;
-          }
-          }
-          }
-          }
-
-          $em->flush();
-
-          $request->getSession()->getFlashBag()->add('notice', 'Data Persisted');
-
-          return $this->redirectToRoute('view_data', array('id_form' => $id_form, 'id' => $set_id));
-          }
-         */
 
         return [
-            'form' => $form->createView(),
+            'form' => $form2request->createView(),
             'id' => $form_id
         ];
     }
