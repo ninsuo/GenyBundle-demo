@@ -25,9 +25,14 @@ class DefaultController extends BaseController {
                 array(), // Pas de critère
                 array('title' => 'asc')
         );
+                $listItems = $em->getRepository('GLItemBundle:Item')->findBy(
+                array(), // Pas de critère
+                array('name' => 'asc')
+        );
 
         return [
-            'listForms' => $listForms
+            'listForms' => $listForms,
+            'listItems' => $listItems
         ];
     }
 
