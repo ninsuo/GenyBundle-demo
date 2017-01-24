@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Item
  *
- * @ORM\Table()
+ * @ORM\Table("gl_item")
  * @ORM\Entity(repositoryClass="GL\ItemBundle\Repository\ItemRepository")
  */
 class Item {
