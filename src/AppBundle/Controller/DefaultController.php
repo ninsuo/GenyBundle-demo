@@ -281,7 +281,7 @@ class DefaultController extends BaseController {
 
         $item = new Item();
 
-        $form = $this->get('form.factory')->create(new ItemType(), $item);
+         $form = $this->get('form.factory')->create(new ItemType(), $item);
 
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();

@@ -5,6 +5,7 @@ namespace GL\ItemBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use GenyBundle\Services\Geny;
 
 class ItemType extends AbstractType {
 
@@ -15,7 +16,7 @@ class ItemType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('name')
-                ->add('description')
+                ->add('description')                
                 ->add('save', 'submit')
         ;
     }
