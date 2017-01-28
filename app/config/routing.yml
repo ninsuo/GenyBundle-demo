@@ -6,11 +6,6 @@ app:
     type:     annotation
     prefix:   /
     
-gl_item:
-    resource: "@GLItemBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 # Hello, world!
 geny:
     resource: "@GenyBundle/Controller/"

@@ -25,20 +25,7 @@
                 {% endfor %}
             </ul>
             
-            <div class="text-center h2">Item List</div>
-            <ul class="list-group">
-                {% for item in listItems %}
-                    <li class="list-group-item">
-                        <h3>
-                            <a href="{{ path('view_item', {'id': item.id}) }}">
-                                <i class="glyphicon glyphicon-menu-right"></i>
-                                {{ item.name }}                    
-                            </a>                                                
-                        </h3>
-                    </li>
-                {% endfor %}
-            </ul>
-
+ 
         </div>
 
         <div class="col-md-6">
@@ -47,12 +34,6 @@
                 <a href="{{ path('create_form') }}" class="btn btn-default">
                     <i class="glyphicon glyphicon-plus"></i>
                     New Form
-                </a>
-            </p>
-            <p>
-                <a href="{{ path('add_item') }}" class="btn btn-default">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    New Item
                 </a>
             </p>
         </div>

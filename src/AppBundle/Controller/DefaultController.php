@@ -9,8 +9,6 @@ use AppBundle\Base\BaseController;
 use GenyBundle\Entity\Form;
 use GenyBundle\Form\FormType;
 use GenyBundle\Entity\Data;
-use GL\ItemBundle\Entity\Item;
-use GL\ItemBundle\Form\ItemType;
 
 class DefaultController extends BaseController {
 
@@ -25,14 +23,9 @@ class DefaultController extends BaseController {
                 array(), // Pas de critère
                 array('title' => 'asc')
         );
-                $listItems = $em->getRepository('GLItemBundle:Item')->findBy(
-                array(), // Pas de critère
-                array('name' => 'asc')
-        );
 
         return [
-            'listForms' => $listForms,
-            'listItems' => $listItems
+            'listForms' => $listForms
         ];
     }
 
@@ -267,61 +260,6 @@ class DefaultController extends BaseController {
 
         return [
             'id' => $id
-        ];
-    }
-
-    /**
-     * @Route(
-     * "/add/item/",
-     *  name="add_item"
-     * )
-     * @Template()
-     */
-    public function addItemAction(Request $request) {
-
-        $item = new Item();
-
-         $form = $this->get('form.factory')->create(new ItemType(), $item);
-
-        if ($form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($item);
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('notice', 'Item persisted');
-
-            return $this->redirect($this->generateUrl('view_item', array('id' => $item->getId())));
-        }
-
-
-
-        return [
-            'form' => $form->createView()
-        ];
-    }
-
-    /**
-     * @Route(
-     * "/view/item/{id}",
-     *  name="view_item",
-     *  requirements = {
-     *     "id" = "^\d+$"
-     *                }
-     * )
-     * @Template()
-     */
-    public function viewItemAction(Request $request, $id) {
-
-
-        $em = $this->getDoctrine()
-                ->getEntityManager();
-
-
-        $item = $em->getRepository('GLItemBundle:Item')
-                ->findOneById($id);
-
-        return [
-            'item' => $item
         ];
     }
 
