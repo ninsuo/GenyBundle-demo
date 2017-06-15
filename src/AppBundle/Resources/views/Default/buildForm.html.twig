@@ -1,0 +1,24 @@
+{# src/AppBundle/Resources/views/Default/buildForm.html.twig #}
+
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="text-center h2">Builder</div>
+            {{ render(controller('GenyBundle:Builder:render', {id: (id) })) }}
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+    <script src="{{ asset('bundles/fuzquickstart/js/jquery.domajax.js') }}"></script>
+    <script src="{{ asset('bundles/geny/js/collection/jquery.collection.js') }}"></script>
+    <script src="{{ asset('bundles/geny/js/jquery.geny.js') }}"></script>
+
+{% endblock %}

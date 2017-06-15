@@ -1,0 +1,21 @@
+{# AppBundle:Default:viewSetDataForm.html #}
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="text-center h2">{{form.title}} : Data Set List</div>
+
+            <div class="well well-sm">{{form.description}}</div>
+            <ul class="list-group">
+                {% for key, value in data_list %}
+                    <li class="list-group-item"><a href="{{ path('view_data', {'id': value.id}) }}">{{ value.id }} / {{ value.updatedAt|date('d/m/Y H:m:s') }}</a></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+
+{% endblock %}
