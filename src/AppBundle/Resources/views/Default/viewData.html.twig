@@ -1,0 +1,39 @@
+{# AppBundle:Default:viewDataForm.html #}
+{% extends 'FuzQuickStartBundle::layout.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="text-center h2">{{form.title}} : Data Set {{id}}</div>
+
+            <div class="well well-sm">{{form.description}}</div>
+
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert alert-success" role="alert">
+                    <p>{{ message }}</p>
+                </div>
+
+
+            {% endfor %}
+
+            {% for key, value in data_field %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ value['field_label'] }}</div>
+                    <div class="panel-body">
+                        {% if value['type'] == 'text' %}
+                            {{ value['value'] }}
+                        {% elseif value['type'] == 'checkbox' %}
+                            <input type="checkbox" {% if value['value'] == 1 %} checked {% endif %}>
+                        {% else %}
+                            Type not implemented yet {{ value['value'] }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            <p><a href="{{ path('update_data', {'id': id }) }}" class="btn btn-primary">Update Data</a></p>
+        </div>
+    </div>
+
+{% endblock %}
