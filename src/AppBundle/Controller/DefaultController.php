@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Base\BaseController;
 use GenyBundle\Entity\Form;
-use GenyBundle\Form\FormType;
+use GenyBundle\Form\Type\FormType;
 use GenyBundle\Entity\Data;
 
 class DefaultController extends BaseController {
@@ -16,13 +16,10 @@ class DefaultController extends BaseController {
      * @Route("/", name="home")
      * @Template()
      */
-    public function indexAction(Request $request) {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
-        $listForms = $em->getRepository('GenyBundle:Form')->findBy(
-                array(), // Pas de critère
-                array('title' => 'asc')
-        );
+        $listForms = $em->getRepository('GenyBundle:Form')->findBy([], ['title' => 'asc']);
 
         return [
             'listForms' => $listForms
@@ -37,24 +34,23 @@ class DefaultController extends BaseController {
 
         ini_set('display_errors', 1);
 
-        $form_entity = new Form();
+        $entity = new Form();
 
-        $form = $this->get('form.factory')->create(FormType::class, $form_entity);
-
+        $form = $this->get('form.factory')->create(FormType::class, [
+            'form_builder' => $entity,
+            'submit_builder' => $entity,
+        ]);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
-
-            $em->persist($form_entity);
-
+            $em->persist($entity);
             $em->flush();
 
 
 //$request->getSession()->getFlashBag()->add('notice', 'Form created');// to implement ?
 
 
-            return $this->redirectToRoute('build_form', array('id' => $form_entity->getId()));
+            return $this->redirectToRoute('build_form', array('id' => $entity->getId()));
         }
 
         return [

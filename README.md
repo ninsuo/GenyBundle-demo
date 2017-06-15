@@ -1,12 +1,13 @@
-#GenyBundle Demo
+# GenyBundle Demo
 
-##Goal of GenyBundle is to provide :
+## Goal of GenyBundle is to provide :
 
 A user interface to create forms
 
 A user interface to render and validate those forms
 
-##Goal GenyBundle Demo is to show :
+## Goal GenyBundle Demo is to show :
+
 
 
 How to implement a form builder
@@ -50,10 +51,10 @@ Access it throught command line.
 
     cd C:\wamp\www\GenyBundleDemo
 
-Type the command : 
+Type the command :
 
     php composer.phar install
-    
+
 or something like
 
     php ../composer.phar install
@@ -65,7 +66,7 @@ Be patient.
 Personnaly, I have an memry issue. So I have to run this command :
 
     php -d memory_limit=2G ../composer.phar install
-    
+
 More info here : https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
 
 Answer the questions...
@@ -83,25 +84,25 @@ Put it in "C:\wamp\www\GenyBundleDemo\src" under the name : "GenyBundle"
 Create the base :
 
     php app/console doctrine:database:create
-    
+
 Create the tables
 
     php app/console doctrine:schema:update --force
-    
+
 ## Step 5
 
 Make assets accessible
 
      php app/console assetic:dump
-     
+
      php app/console assets:install --symlink
-     
+
 ## Step 6
 
 Access it  !
 
 For example : http://localhost/GenyBundleDemo/web/app_dev.php/
 
-Enjoy it !!!! or not... 
+Enjoy it !!!! or not...
 
 Be aware only the input text can be persisted and updated !

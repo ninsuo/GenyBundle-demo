@@ -3,26 +3,6 @@
     "license": "MIT",
     "type": "project",
     "description": "GenyBundle demonstration website",
-    "autoload": {
-        "psr-4": {
-            "GenyBundle\\": "../GenyBundle/",
-            "": "src/",
-            "SymfonyStandard\\": "app/SymfonyStandard/"
-        }
-    },
-     "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "jquery/jquery",
-                "version": "1.11.1",
-                "dist": {
-                    "url": "https://code.jquery.com/jquery-1.11.1.js",
-                    "type": "file"
-                }
-            }
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "^2.3",
@@ -41,13 +21,31 @@
         "jms/i18n-routing-bundle": "^1.1",
         "jms/translation-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "^2",
-        "smart-core/accelerator-cache-bundle": "^1",
-	"jms/serializer": "^1.0",
-        "jquery/jquery":  "1.11.*"
+    	"jms/serializer": "^1.0",
+        "jquery/jquery": "1.11.1",
+        "ninsuo/geny-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^2.3"
     },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+     "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.11.1",
+                "dist": {
+                    "url": "https://code.jquery.com/jquery-1.11.1.js",
+                    "type": "file"
+                }
+            }
+        }
+    ],
     "scripts": {
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"
@@ -60,7 +58,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-            "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache",
             "php app/console assetic:dump web/"
         ],
         "post-update-cmd": [
@@ -71,7 +68,6 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Braincrafted\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::install",
-            "SmartCore\\Bundle\\AcceleratorCacheBundle\\Composer\\ScriptHandler::clearCache",
             "php app/console assetic:dump web/"
         ]
     },
